@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1529440871 source:c:\test\pattie\tp4\arraylist\examples\example_4\src\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../inc/ArrayList.h"
+
+1529436768 c:\test\pattie\tp4\arraylist\examples\example_4\inc\arraylist.h
+
+1530304126 source:c:\test\pattie\attie_2doparcial\alumnos.c
+	<stdio.h>
+	<stdlib.h>
+	"alumnos.h"
+	"../TP4/arraylist/examples/example_4/inc/ArrayList.h"
+
+1530304082 c:\test\pattie\attie_2doparcial\alumnos.h
+	"../TP4/arraylist/examples/example_4/inc/ArrayList.h"
+
+1530304151 source:c:\test\pattie\attie_2doparcial\main.c
+	<stdio.h>
+	<stdlib.h>
+	"alumnos.h"
+	"../TP4/arraylist/examples/example_4/inc/ArrayList.h"
+
