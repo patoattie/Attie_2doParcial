@@ -4,6 +4,7 @@
 #include "../TP4/arraylist/examples/example_4/inc/ArrayList.h"
 
 #define NOMBRE_ARCHIVO_ALUMNOS "alumnos.csv"
+#define NOMBRE_ARCHIVO_SALIDA "out.csv"
 #define TAM_NOMBRE 50
 #define MASACARA_ARCHIVO_ALUMNOS "%[^,],%[^,],%[^,],%[^\n]\n"
 #define CANTIDAD_CAMPOS_ARCHIVO_ALUMNOS 4
@@ -11,6 +12,7 @@
 #define CANTIDAD_FILAS_ARCHIVO_ALUMNOS 10
 #define SEXO_M 'M'
 #define SEXO_F 'F'
+#define SEPARADOR_ARCHIVO_SALIDA ","
 
 typedef struct
 {
@@ -40,5 +42,6 @@ int alumno_compare(void* pAlumnoA, void* pAlumnoB);
 int alumno_listarOrdenado(ArrayList* arrayAlumnos);
 int alumno_filtrar(void* item);
 int alumno_listarFiltrado(ArrayList* arrayAlumnos);
+int alumnos_guardarEnArchivo(const char* nombreArchivo, ArrayList* arrayAlumnos);
 
 #endif // ALUMNOS_H_INCLUDED

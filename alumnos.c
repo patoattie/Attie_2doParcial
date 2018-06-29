@@ -363,3 +363,47 @@ int alumno_listarFiltrado(ArrayList* arrayAlumnos)
 
     return retorno;
 }
+
+int alumnos_guardarEnArchivo(const char* nombreArchivo, ArrayList* arrayAlumnos)
+{
+    FILE* archivoAlumnos;
+    int retorno = -1;
+    int cerroArchivo;
+    int arrayEstaVacio = al_isEmpty(arrayAlumnos);
+    //char continua;
+    //int limpiaArray;
+    //int confirmaParseo = 1;
+    char salida[80];
+    int i;
+    Alumno* unAlumno = NULL;
+    int cantidadGuardada;
+
+    if(arrayEstaVacio == 0)
+    {
+        archivoAlumnos = fopen(nombreArchivo, "w");
+        if(archivoAlumnos != NULL)
+        {
+            for(i = 0; i < al_len(arrayAlumnos); i++)
+            {
+                unAlumno = (Alumno*)al_get(arrayAlumnos, i);
+                strcpy(salida, alumno_getNombre(unAlumno));
+                strcat(salida, SEPARADOR_ARCHIVO_SALIDA);
+                strcat(salida, sprintf("%d", alumno_getEdad(unAlumno)));
+                strcat(salida, SEPARADOR_ARCHIVO_SALIDA);
+                strcat(salida, sprintf("%d", alumno_getLegajo(unAlumno)));
+                strcat(salida, SEPARADOR_ARCHIVO_SALIDA);
+                strcat(salida, sprintf("%c", alumno_getSexo(unAlumno)));
+                strcat(salida, "\n");
+                cantidadGuardada = fprintf(archivoAlumnos, salida);
+                cerroArchivo = fclose(archivoAlumnos);
+
+                if(cerroArchivo == 0)
+                {
+                    retorno = 0;
+                }
+            }
+        }
+    }
+
+    return retorno;
+}

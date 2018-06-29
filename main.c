@@ -34,8 +34,8 @@ int main()
             printf("1. Parse del archivo alumnos.csv\n");
             printf("2. Listar Alumnos\n");
             printf("3. Filtrar mayores a 30\n");
-            /*printf("4. Agregar un elemento\n");
-            printf("5. Elimina un elemento\n");
+            printf("4. Exportar mayores a 30\n");
+            /*printf("5. Elimina un elemento\n");
             printf("6. Listar Empleados (Desde/Hasta)\n\n");*/
             printf("7. Salir\n");
 
@@ -70,19 +70,19 @@ int main()
                     printf("No hay Alumnos cargados\n");
                 }
                 break;
-/*
+
             case 4:
-                cargaEmpleado = employee_agregar(arrayEmpleados);
-                if(cargaEmpleado == 1)
+                parseoAlumnos = alumnos_guardarEnArchivo(NOMBRE_ARCHIVO_SALIDA, arrayAlumnos);
+                if(parseoAlumnos == 0)
                 {
-                    printf("Alta de Empleado OK\n");
+                    printf("Exportacion al archivo OK\n");
                 }
                 else
                 {
-                    printf("Error al cargar empleado\n");
+                    printf("ERROR en Exportacion\n");
                 }
                 break;
-
+/*
             case 5:
                 listaEmpleados = employee_listar(arrayEmpleados);
                 if(listaEmpleados < 1)
