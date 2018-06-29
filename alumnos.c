@@ -293,3 +293,40 @@ int alumno_listar(ArrayList* arrayAlumnos)
 
     return retorno;
 }
+
+int alumno_compare(void* pAlumnoA, void* pAlumnoB)
+{
+    int retorno = 0;
+    Alumno* alumnoA = (Alumno*) pAlumnoA;
+    Alumno* alumnoB = (Alumno*) pAlumnoB;
+
+    if(alumnoA != NULL && alumnoB != NULL)
+    {
+        if(alumnoA->edad < alumnoB->edad)
+        {
+            retorno = -1;
+        }
+        else if(alumnoA->edad > alumnoB->edad)
+        {
+            retorno = 1;
+        }
+    }
+
+    return retorno;
+}
+
+int alumno_listarOrdenado(ArrayList* arrayAlumnos)
+{
+    int retorno = -1;
+    ArrayList* arrayCopia;
+
+    if(al_isEmpty(arrayAlumnos) == 0)
+    {
+        arrayCopia = al_clone(arrayAlumnos);
+        al_sort(arrayCopia, alumno_compare, 1);
+        retorno = alumno_listar(arrayCopia);
+        al_deleteArrayList(arrayCopia);
+    }
+
+    return retorno;
+}

@@ -36,5 +36,7 @@ int charLegajoToLegajo(char* charLegajo);
 char charSexoToSexo(char* charSexo);
 void alumno_print(Alumno* this);
 int alumno_listar(ArrayList* arrayAlumnos);
+int alumno_compare(void* pAlumnoA, void* pAlumnoB);
+int alumno_listarOrdenado(ArrayList* arrayAlumnos);
 
 #endif // ALUMNOS_H_INCLUDED

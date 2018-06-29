@@ -56,7 +56,7 @@ int main()
                 break;
 
             case 2:
-                listaAlumnos = alumno_listar(arrayAlumnos);
+                listaAlumnos = alumno_listarOrdenado(arrayAlumnos);
                 if(listaAlumnos < 0)
                 {
                     printf("No hay Alumnos cargados\n");
