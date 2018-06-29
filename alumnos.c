@@ -330,3 +330,36 @@ int alumno_listarOrdenado(ArrayList* arrayAlumnos)
 
     return retorno;
 }
+
+int alumno_filtrar(void* item)
+{
+    int retorno = 0;
+    Alumno* unAlumno;
+
+    if(item != NULL)
+    {
+        unAlumno = (Alumno*) item;
+        if(unAlumno->edad > 30)
+        {
+            retorno = 1;
+        }
+    }
+
+    return retorno;
+}
+
+int alumno_listarFiltrado(ArrayList* arrayAlumnos)
+{
+    int retorno = -1;
+    ArrayList* arrayCopia;
+
+    if(al_isEmpty(arrayAlumnos) == 0)
+    {
+        arrayCopia = al_filter(arrayAlumnos, alumno_filtrar);
+        al_sort(arrayCopia, alumno_compare, 1);
+        retorno = alumno_listar(arrayCopia);
+        al_deleteArrayList(arrayCopia);
+    }
+
+    return retorno;
+}

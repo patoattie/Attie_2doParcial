@@ -33,8 +33,8 @@ int main()
 
             printf("1. Parse del archivo alumnos.csv\n");
             printf("2. Listar Alumnos\n");
-            /*printf("3. Ordenar por nombre\n");
-            printf("4. Agregar un elemento\n");
+            printf("3. Filtrar mayores a 30\n");
+            /*printf("4. Agregar un elemento\n");
             printf("5. Elimina un elemento\n");
             printf("6. Listar Empleados (Desde/Hasta)\n\n");*/
             printf("7. Salir\n");
@@ -62,27 +62,15 @@ int main()
                     printf("No hay Alumnos cargados\n");
                 }
                 break;
-/*
+
             case 3:
-                arrayEstaVacio = al_isEmpty(arrayEmpleados);
-                if(arrayEstaVacio == 0)
+                listaAlumnos = alumno_listarFiltrado(arrayAlumnos);
+                if(listaAlumnos < 0)
                 {
-                    ordenaLista = al_sort(arrayEmpleados, employee_compare, 1);
-                    if(ordenaLista == 0)
-                    {
-                        printf("Ordenamiento OK\n");
-                    }
-                    else
-                    {
-                        printf("ERROR en ordenamiento\n");
-                    }
-                }
-                else
-                {
-                    printf("No hay Empleados cargados\n");
+                    printf("No hay Alumnos cargados\n");
                 }
                 break;
-
+/*
             case 4:
                 cargaEmpleado = employee_agregar(arrayEmpleados);
                 if(cargaEmpleado == 1)

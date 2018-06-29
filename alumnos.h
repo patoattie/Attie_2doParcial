@@ -38,5 +38,7 @@ void alumno_print(Alumno* this);
 int alumno_listar(ArrayList* arrayAlumnos);
 int alumno_compare(void* pAlumnoA, void* pAlumnoB);
 int alumno_listarOrdenado(ArrayList* arrayAlumnos);
+int alumno_filtrar(void* item);
+int alumno_listarFiltrado(ArrayList* arrayAlumnos);
 
 #endif // ALUMNOS_H_INCLUDED
