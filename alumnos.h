@@ -33,6 +33,7 @@ int alumno_setSexo(Alumno* this, const char sexo);
 char alumno_getSexo(Alumno* this);
 int charEdadToEdad(char* charEdad);
 int charLegajoToLegajo(char* charLegajo);
+char charSexoToSexo(char* charSexo);
 void alumno_print(Alumno* this);
 int alumno_listar(ArrayList* arrayAlumnos);
 

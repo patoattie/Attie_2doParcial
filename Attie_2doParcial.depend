@@ -7,18 +7,22 @@
 
 1529436768 c:\test\pattie\tp4\arraylist\examples\example_4\inc\arraylist.h
 
-1530304126 source:c:\test\pattie\attie_2doparcial\alumnos.c
+1530305342 source:c:\test\pattie\attie_2doparcial\alumnos.c
 	<stdio.h>
 	<stdlib.h>
+	<ctype.h>
+	<string.h>
 	"alumnos.h"
 	"../TP4/arraylist/examples/example_4/inc/ArrayList.h"
 
-1530304082 c:\test\pattie\attie_2doparcial\alumnos.h
+1530304628 c:\test\pattie\attie_2doparcial\alumnos.h
 	"../TP4/arraylist/examples/example_4/inc/ArrayList.h"
 
-1530304151 source:c:\test\pattie\attie_2doparcial\main.c
+1530304267 source:c:\test\pattie\attie_2doparcial\main.c
 	<stdio.h>
 	<stdlib.h>
+	<ctype.h>
+	<string.h>
 	"alumnos.h"
 	"../TP4/arraylist/examples/example_4/inc/ArrayList.h"
 

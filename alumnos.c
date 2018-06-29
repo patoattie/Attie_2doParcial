@@ -58,7 +58,7 @@ int alumnos_cargarDesdeArchivo(const char* nombreArchivo, ArrayList* arrayAlumno
             parseoArchivo = alumnos_parser(archivoAlumnos, arrayAlumnos);
             cerroArchivo = fclose(archivoAlumnos);
 
-            if(parseoArchivo == 1 && cerroArchivo == 0)
+            if(parseoArchivo == 0 && cerroArchivo == 0)
             {
                 retorno = 0;
             }
@@ -76,10 +76,11 @@ int alumnos_parser(FILE* pFile, ArrayList* pArrayListAlumno)
     Alumno* unAlumno;
     char charEdad[10];
     char charLegajo[10];
+    char charSexo[10];
     int agregoAlumno;
     char cabecera[80];
     char nombre[TAM_NOMBRE];
-    char sexo;
+    //char sexo;
     int guardoDato;
 
     if(pFile != NULL)
@@ -95,7 +96,7 @@ int alumnos_parser(FILE* pFile, ArrayList* pArrayListAlumno)
             unAlumno = alumno_new();
             if(unAlumno != NULL)
             {
-                cantidadDatosLeidos = fscanf(pFile, MASACARA_ARCHIVO_ALUMNOS, nombre, charEdad, charLegajo, sexo);
+                cantidadDatosLeidos = fscanf(pFile, MASACARA_ARCHIVO_ALUMNOS, nombre, charEdad, charLegajo, charSexo);
                 if(cantidadDatosLeidos == CANTIDAD_CAMPOS_ARCHIVO_ALUMNOS)
                 {
                     guardoDato = alumno_setNombre(unAlumno, nombre);
@@ -116,7 +117,7 @@ int alumnos_parser(FILE* pFile, ArrayList* pArrayListAlumno)
                         break;
                     }
 
-                    guardoDato = alumno_setSexo(unAlumno, sexo);
+                    guardoDato = alumno_setSexo(unAlumno, charSexoToSexo(charSexo));
                     if(guardoDato < 0)
                     {
                         break;
@@ -248,6 +249,25 @@ int charLegajoToLegajo(char* charLegajo)
     legajo = atoi(charLegajo);
 
     return legajo;
+}
+
+char charSexoToSexo(char* charSexo)
+{
+    char sexo;
+    if(strncmp(charSexo, "M", 1) == 0 || strncmp(charSexo, "m", 1) == 0)
+    {
+        sexo = SEXO_M;
+    }
+    else if(strncmp(charSexo, "F", 1) == 0 || strncmp(charSexo, "f", 1) == 0)
+    {
+        sexo = SEXO_F;
+    }
+    else
+    {
+        sexo = ' ';
+    }
+
+    return sexo;
 }
 
 void alumno_print(Alumno* this)
