@@ -80,7 +80,6 @@ int alumnos_parser(FILE* pFile, ArrayList* pArrayListAlumno)
     int agregoAlumno;
     char cabecera[80];
     char nombre[TAM_NOMBRE];
-    //char sexo;
     int guardoDato;
 
     if(pFile != NULL)
@@ -124,7 +123,6 @@ int alumnos_parser(FILE* pFile, ArrayList* pArrayListAlumno)
                     }
 
                     agregoAlumno = al_add(pArrayListAlumno, unAlumno);
-                    //printf("%d\n", al_indexOf(pArrayListEmployee, unEmpleado));
                     if(agregoAlumno < 0) //Hubo error
                     {
                         break;
@@ -207,21 +205,19 @@ int alumno_setNombre(Alumno* this, const char* nombre)
     return 0;
 }
 
-char* alumno_getNombre(Alumno* this)
+void alumno_getNombre(Alumno* this, char* nombre)
 {
-    char* retorno = NULL;
-    strcpy(retorno, this->nombre);
-
-    return retorno;
+    strcpy(nombre, this->nombre);
 }
 
 int alumno_setSexo(Alumno* this, const char sexo)
 {
     int retorno = -1;
-    if(sexo == SEXO_M || sexo == SEXO_F)
+
+    if(toupper(sexo) == SEXO_M || toupper(sexo) == SEXO_F)
     {
         retorno = 0;
-        this->sexo = sexo;
+        this->sexo = toupper(sexo);
     }
 
     return retorno;
@@ -253,16 +249,9 @@ int charLegajoToLegajo(char* charLegajo)
 
 char charSexoToSexo(char* charSexo)
 {
-    char sexo;
-    if(strncmp(charSexo, "M", 1) == 0 || strncmp(charSexo, "m", 1) == 0)
-    {
-        sexo = SEXO_M;
-    }
-    else if(strncmp(charSexo, "F", 1) == 0 || strncmp(charSexo, "f", 1) == 0)
-    {
-        sexo = SEXO_F;
-    }
-    else
+    char sexo = toupper(*charSexo);
+
+    if(sexo != SEXO_M && sexo != SEXO_F)
     {
         sexo = ' ';
     }
@@ -339,7 +328,7 @@ int alumno_filtrar(void* item)
     if(item != NULL)
     {
         unAlumno = (Alumno*) item;
-        if(unAlumno->edad > 30)
+        if(alumno_getEdad(unAlumno) > 30)
         {
             retorno = 1;
         }
@@ -369,38 +358,58 @@ int alumnos_guardarEnArchivo(const char* nombreArchivo, ArrayList* arrayAlumnos)
     FILE* archivoAlumnos;
     int retorno = -1;
     int cerroArchivo;
-    int arrayEstaVacio = al_isEmpty(arrayAlumnos);
-    //char continua;
-    //int limpiaArray;
-    //int confirmaParseo = 1;
     char salida[80];
+    char charEdad[10];
+    char charLegajo[10];
+    char charSexo[10];
+    char nombre[TAM_NOMBRE];
     int i;
     Alumno* unAlumno = NULL;
     int cantidadGuardada;
+    int longitudCadena;
+    int huboError = 0;
+    ArrayList* arrayCopia;
 
-    if(arrayEstaVacio == 0)
+    if(al_isEmpty(arrayAlumnos) == 0)
     {
+        arrayCopia = al_filter(arrayAlumnos, alumno_filtrar);
+        al_sort(arrayCopia, alumno_compare, 1);
         archivoAlumnos = fopen(nombreArchivo, "w");
         if(archivoAlumnos != NULL)
         {
-            for(i = 0; i < al_len(arrayAlumnos); i++)
+            for(i = 0; i < al_len(arrayCopia); i++)
             {
-                unAlumno = (Alumno*)al_get(arrayAlumnos, i);
-                strcpy(salida, alumno_getNombre(unAlumno));
-                strcat(salida, SEPARADOR_ARCHIVO_SALIDA);
-                strcat(salida, sprintf("%d", alumno_getEdad(unAlumno)));
-                strcat(salida, SEPARADOR_ARCHIVO_SALIDA);
-                strcat(salida, sprintf("%d", alumno_getLegajo(unAlumno)));
-                strcat(salida, SEPARADOR_ARCHIVO_SALIDA);
-                strcat(salida, sprintf("%c", alumno_getSexo(unAlumno)));
-                strcat(salida, "\n");
-                cantidadGuardada = fprintf(archivoAlumnos, salida);
-                cerroArchivo = fclose(archivoAlumnos);
+                unAlumno = (Alumno*)al_get(arrayCopia, i);
 
-                if(cerroArchivo == 0)
+                alumno_getNombre(unAlumno, nombre);
+                sprintf(charEdad, "%d", alumno_getEdad(unAlumno));
+                sprintf(charLegajo, "%d", alumno_getLegajo(unAlumno));
+                sprintf(charSexo, "%c", alumno_getSexo(unAlumno));
+
+                strcpy(salida, nombre);
+                strcat(salida, SEPARADOR_ARCHIVO_SALIDA);
+                strcat(salida, charEdad);
+                strcat(salida, SEPARADOR_ARCHIVO_SALIDA);
+                strcat(salida, charLegajo);
+                strcat(salida, SEPARADOR_ARCHIVO_SALIDA);
+                strcat(salida, charSexo);
+                strcat(salida, "\n");
+
+                longitudCadena = strlen(salida);
+                cantidadGuardada = fwrite(salida, sizeof(char), longitudCadena, archivoAlumnos);
+                if(cantidadGuardada != longitudCadena)
                 {
-                    retorno = 0;
+                    huboError = 1;
+                    break;
                 }
+            }
+
+            cerroArchivo = fclose(archivoAlumnos);
+            al_deleteArrayList(arrayCopia);
+
+            if(cerroArchivo == 0 && huboError == 0)
+            {
+                retorno = 0;
             }
         }
     }

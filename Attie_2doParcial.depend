@@ -26,3 +26,30 @@
 	"alumnos.h"
 	"../TP4/arraylist/examples/example_4/inc/ArrayList.h"
 
+1530404384 source:f:\mis documentos\escritorio\programacion\utn\programacion 1\attie_2doparcial\alumnos.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"alumnos.h"
+	"../TP4/arraylist/examples/example_4/inc/ArrayList.h"
+
+1530402555 f:\mis documentos\escritorio\programacion\utn\programacion 1\attie_2doparcial\alumnos.h
+	"../TP4/arraylist/examples/example_4/inc/ArrayList.h"
+
+1530403649 f:\mis documentos\escritorio\programacion\utn\programacion 1\tp4\arraylist\examples\example_4\inc\arraylist.h
+
+1530403649 source:f:\mis documentos\escritorio\programacion\utn\programacion 1\attie_2doparcial\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"alumnos.h"
+	"../TP4/arraylist/examples/example_4/inc/ArrayList.h"
+
+1530401041 source:f:\mis documentos\escritorio\programacion\utn\programacion 1\tp4\arraylist\examples\example_4\src\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../inc/ArrayList.h"
+

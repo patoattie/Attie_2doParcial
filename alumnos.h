@@ -30,7 +30,7 @@ int alumno_getEdad(Alumno* this);
 int alumno_setLegajo(Alumno* this, int legajo);
 int alumno_getLegajo(Alumno* this);
 int alumno_setNombre(Alumno* this, const char* nombre);
-char* alumno_getNombre(Alumno* this);
+void alumno_getNombre(Alumno* this, char* nombre);
 int alumno_setSexo(Alumno* this, const char sexo);
 char alumno_getSexo(Alumno* this);
 int charEdadToEdad(char* charEdad);
